@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ genres }} Levels{% endblock %}
+
+{% block content %}
+<header>
+    <h1>{{ genres }}: Be wary upon selecting the challenge</h1>
+</header>
+
+<div class="levels-container">
+    <a href="{{ url_for('quiz', genres=genres, levels='rookie') }}" class="level-btn">Rookie</a>
+    <a href="{{ url_for('quiz', genres=genres, levels='intermediate') }}" class="level-btn">Intermediate</a>
+    <a href="{{ url_for('quiz', genres=genres, levels='master') }}" class="level-btn">Master</a>
+</div>
+{% endblock %}

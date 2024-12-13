@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ genres }}{% endblock %}
+
+{% block content %}
+<header>
+    <p> {{ genres }} :
+         Be wary upon selecting the challenge </p>
+         </p> Rookie quiz: Guess by filling out the blank </p>
+        </p> Intermediate quiz: Guess by the bad description</p>
+        </p> Master quiz: Guess by the side characters name </p>
+</header>
+<div class="levels-container">
+    <div class="level-box">
+        <a href="{{ url_for('quiz', genres=genres, levels='rookie') }}">Rookie</a>
+    </div>
+    <div class="level-box">
+        <a href="{{ url_for('quiz', genres=genres, levels='intermediate') }}">Intermediate</a>
+    </div>
+    <div class="level-box">
+        <a href="{{ url_for('quiz', genres=genres, levels='master') }}">Master</a>
+    </div>
+</div>
+{% endblock %}

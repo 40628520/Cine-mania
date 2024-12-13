@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %}Quiz - {{ genres }} - {{ levels }}{% endblock %}
+
+{% block content %}
+<div class="quiz-container">
+    <h1>{{ genres }} Quiz - {{ levels }}</h1>
+    <div id="timer" class="timer">Time Left: <span id="time-remaining">00:08</span></div>
+    <form method="POST" id="quiz-form">
+        <p class="question-text"><strong>Q{{ question_number }}: {{ question.question }}</strong></p>
+        <div class="options-container">
+            {% for option in question.options %}
+            <input type="radio" id="option-{{ loop.index }}" name="answer" value="{{ option }}">
+            <label for="option-{{ loop.index }}">{{ option }}</label>
+            {% endfor %}
+        </div>
+        <button type="submit" class="submit-btn" id="submit-btn">Submit</button>
+    </form>
+    <p class="question-progress">Question {{ question_number }} of {{ total_questions }}</p>
+</div>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const submitButton = document.getElementById('submit-btn');
+    const radioButtons = document.querySelectorAll('input[type="radio"]');
+    const timerElement = document.getElementById('time-remaining');
+
+    // Timer variables
+    let totalTime = 08;
+    let timerInterval;
+
+    // Start the timer
+    function startTimer() {
+        timerInterval = setInterval(() => {
+            const minutes = Math.floor(totalTime / 60);
+            const seconds = totalTime % 60;
+
+            timerElement.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+            totalTime--;
+
+            if (totalTime < 0) {
+                clearInterval(timerInterval);
+                alert("Time's up! Submitting your current progress.");
+                document.getElementById('quiz-form').submit();
+            }
+        }, 1000);
+    }
+
+    // Enable submit button when an option is selected
+    radioButtons.forEach(radio => {
+        radio.addEventListener('change', () => {
+            submitButton.disabled = false;
+        });
+    });
+
+    // Start the timer on page load
+    startTimer();
+});
+</script>
+{% endblock %}

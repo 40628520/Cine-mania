@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="genre-section">
+        <a href="{{ url_for('genres_page', genres='movies') }}" aria-label="Go to Movies">
+            <img src="{{ url_for('static', filename='images/movies.jpg') }}" alt="Movies" class="genre-image">
+        </a>
+        <h2 class="genre-title">Movies</h2>
+    </div>
+    <div class="genre-section">
+        <a href="{{ url_for('genres_page', genres='tvshows') }}" aria-label="Go to TV Shows">
+            <img src="{{ url_for('static', filename='images/tvshows.jpg') }}" alt="TV Shows" class="genre-image">
+        </a>
+        <h2 class="genre-title">TV Shows</h2>
+    </div>
+    <div class="genre-section">
+        <a href="{{ url_for('genres_page', genres='awards') }}" aria-label="Go to Awards">
+            <img src="{{ url_for('static', filename='images/awards.jpg') }}" alt="Awards" class="genre-image">
+        </a>
+        <h2 class="genre-title">Awards</h2>
+    </div>
+</div>
+{% endblock %}
